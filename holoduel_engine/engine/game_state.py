@@ -1,6 +1,7 @@
 from holoduel_engine.engine.field import Field
 from holoduel_engine.engine.activation_scanner import ActivationScanner
-
+from holoduel_engine.engine.event_system import EventSystem
+from holoduel_engine.engine.chain_system import ChainSystem
 
 class GameState:
     def __init__(self):
@@ -9,6 +10,8 @@ class GameState:
         self.turn_player = None
         self.turn_count = 0
         self.activation_scanner = ActivationScanner(self)
+        self.event_system = EventSystem(self)
+        self.chain_system = ChainSystem()
 
     def add_player(self, player):
         self.players[player.id] = player
@@ -32,6 +35,12 @@ class GameState:
             if zone.is_empty():
                 zone.place_card(monster)
                 print(f"{monster.name} fue invocado en el campo")
+                self.event_system.dispatch("on_summon", {
+                    "player_id": player_id,
+                    "card": monster
+                })
+                
+                self.chain_system.resolve()
                 return True
 
         raise Exception("No hay zonas de monstruo disponibles")
