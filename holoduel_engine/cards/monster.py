@@ -6,3 +6,6 @@ class Monster(Card):
         super().__init__(name)
         self.attack = attack
         self.defense = defense
+        
+    def can_activate(self, game_state):
+        return True

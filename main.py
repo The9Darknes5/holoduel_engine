@@ -29,6 +29,12 @@ def main():
     for i, zone in enumerate(player_field.main_monster_zones):
         if not zone.is_empty():
            print(f"Zona {i}: {zone.card.name}")
+    
+    activatables = game.get_activatable_cards(1)
+
+    print("Cartas activables:")
+    for card in activatables:
+        print(card.name)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 from holoduel_engine.engine.field import Field
+from holoduel_engine.engine.activation_scanner import ActivationScanner
 
 
 class GameState:
@@ -7,6 +8,7 @@ class GameState:
         self.players = {}
         self.turn_player = None
         self.turn_count = 0
+        self.activation_scanner = ActivationScanner(self)
 
     def add_player(self, player):
         self.players[player.id] = player
@@ -33,3 +35,6 @@ class GameState:
                 return True
 
         raise Exception("No hay zonas de monstruo disponibles")
+    
+    def get_activatable_cards(self, player_id):
+        return self.activation_scanner.scan(player_id)
