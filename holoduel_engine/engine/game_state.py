@@ -40,10 +40,15 @@ class GameState:
                     "card": monster
                 })
                 
-                self.chain_system.resolve()
                 return True
 
         raise Exception("No hay zonas de monstruo disponibles")
     
     def get_activatable_cards(self, player_id):
         return self.activation_scanner.scan(player_id)
+    
+    def build_chain(self):
+        print("Construyendo cadena...")
+
+        # Simulación básica (por ahora automático)
+        self.chain_system.resolve()

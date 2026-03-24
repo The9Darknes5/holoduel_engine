@@ -22,6 +22,8 @@ def main():
 
     game.summon_monster(1, blue_eyes)
 
+    game.build_chain()
+
     player_field = game.field.get_player_field(1)
 
     for i, zone in enumerate(player_field.main_monster_zones):
